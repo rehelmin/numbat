@@ -1655,6 +1655,7 @@ impl TypeChecker {
             ast::Statement::DefineStruct {
                 struct_name_span,
                 struct_name,
+                type_parameters,
                 fields,
             } => {
                 self.type_namespace.add_identifier(

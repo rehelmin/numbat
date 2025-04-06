@@ -368,8 +368,16 @@ impl Tokenizer {
                     break;
                 }
                 Some('\\') if !escaped => true,
-                Some('"') | Some('{') if !escaped => {
+                Some('"') if !escaped => {
                     break;
+                }
+                c @ (Some('{') | Some('}')) if c != self.peek2(input) => {
+                    break;
+                }
+                Some('{') | Some('}') => {
+                    // extra advance to skip both curly's making up the escape sequence
+                    self.advance(input);
+                    false
                 }
                 Some(_) => false,
             };
@@ -1148,9 +1156,9 @@ fn test_tokenize_string() {
     );
 
     insta::assert_snapshot!(
-        tokenize_reduced_pretty(r#""start \{inner\} end""#).unwrap(),
+        tokenize_reduced_pretty(r#""start {{inner}} end""#).unwrap(),
         @r###"
-    "\"start \\{inner\\} end\"", StringFixed, 0
+    "\"start {{inner}} end\"", StringFixed, 0
     "", Eof, 21
     "###
     );

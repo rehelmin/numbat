@@ -306,6 +306,14 @@ impl std::ops::Mul for Quantity {
     }
 }
 
+impl std::ops::BitOr for Quantity {
+    type Output = Quantity;
+
+    fn bitor(self, rhs: Self) -> Self::Output {
+        Quantity::new(self.value | rhs.value, self.unit.clone())
+    }
+}
+
 impl std::ops::Div for Quantity {
     type Output = Quantity;
 

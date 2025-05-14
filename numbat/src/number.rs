@@ -136,6 +136,14 @@ impl std::ops::Mul for Number {
     }
 }
 
+impl std::ops::BitOr for Number {
+    type Output = Number;
+
+    fn bitor(self, rhs: Self) -> Self::Output {
+        Number((self.0 as u64 | rhs.0 as u64) as f64)
+    }
+}
+
 impl std::ops::Div for Number {
     type Output = Number;
 

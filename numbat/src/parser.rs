@@ -1139,6 +1139,15 @@ impl<'a> Parser<'a> {
             tokens,
             &[TokenKind::LogicalOr],
             |_| BinaryOperator::LogicalOr,
+            |parser| parser.bitwise_or(tokens),
+        )
+    }
+
+    fn bitwise_or(&mut self, tokens: &[Token<'a>]) -> Result<Expression<'a>> {
+        self.parse_binop(
+            tokens,
+            &[TokenKind::BitwiseOr],
+            |_| BinaryOperator::BitwiseOr,
             |parser| parser.logical_and(tokens),
         )
     }
@@ -3187,6 +3196,8 @@ mod tests {
         Missing closing parenthesis ')' - ParseError { kind: MissingClosingParen, span: Span { start: ByteIndex(57), end: ByteIndex(57), code_source_id: 0 } }
         "###);
     }
+
+    // TODO: Add test for bitwise operations
 
     #[test]
     fn logical_operation() {

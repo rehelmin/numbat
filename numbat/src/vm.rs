@@ -77,6 +77,7 @@ pub enum Op {
     NotEqual,
     LogicalAnd,
     LogicalOr,
+    BitwiseOr,
     LogicalNeg,
 
     /// Similar to Add, but has DateTime on the LHS and a quantity on the RHS
@@ -156,6 +157,7 @@ impl Op {
             | Op::NotEqual
             | Op::LogicalAnd
             | Op::LogicalOr
+            | Op::BitwiseOr
             | Op::LogicalNeg
             | Op::Return
             | Op::GetLastResult => 0,
@@ -189,6 +191,7 @@ impl Op {
             Op::NotEqual => "NotEqual",
             Op::LogicalAnd => "LogicalAnd",
             Op::LogicalOr => "LogicalOr",
+            Op::BitwiseOr => "BitwiseOr",
             Op::LogicalNeg => "LogicalNeg",
             Op::JumpIfFalse => "JumpIfFalse",
             Op::Jump => "Jump",
@@ -803,6 +806,14 @@ impl Vm {
                         _ => unreachable!(),
                     };
                     self.push_bool(result);
+                }
+                Op::BitwiseOr => {
+                    let rhs = self.pop_quantity();
+                    let lhs = self.pop_quantity();
+
+                    let result = Ok(lhs | rhs);
+
+                    self.push_quantity(result.map_err(RuntimeError::QuantityError)?);
                 }
                 Op::LogicalNeg => {
                     let rhs = self.pop_bool();

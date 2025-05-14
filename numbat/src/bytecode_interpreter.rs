@@ -128,6 +128,7 @@ impl BytecodeInterpreter {
                     BinaryOperator::NotEqual => Op::NotEqual,
                     BinaryOperator::LogicalAnd => Op::LogicalAnd,
                     BinaryOperator::LogicalOr => Op::LogicalOr,
+                    BinaryOperator::BitwiseOr => Op::BitwiseOr,
                 };
                 self.vm.add_op(op);
             }

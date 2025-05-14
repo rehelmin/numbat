@@ -78,6 +78,7 @@ pub enum TokenKind {
     GreaterOrEqual,
     LogicalAnd,
     LogicalOr,
+    BitwiseOr,
     Period,
     QuestionMark,
 
@@ -555,6 +556,7 @@ impl Tokenizer {
             '|' if self.match_char(input, '|') => TokenKind::LogicalOr,
             '|' if self.match_char(input, '>') => TokenKind::PostfixApply,
             '*' if self.match_char(input, '*') => TokenKind::Power,
+            '|' => TokenKind::BitwiseOr,
             '+' => TokenKind::Plus,
             '*' | '·' | '⋅' | '×' => TokenKind::Multiply,
             '/' => TokenKind::Divide,

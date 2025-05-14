@@ -83,6 +83,12 @@ pub fn evaluate_const_expr(expr: &typed_ast::Expression) -> Result<Exponent> {
                         "logical",
                     )))
                 }
+                typed_ast::BinaryOperator::BitwiseOr => {
+                    Err(Box::new(TypeCheckError::UnsupportedConstEvalExpression(
+                        e.full_span(),
+                        "bitwise",
+                    )))
+                }
             };
         }
         typed_ast::Expression::Identifier(..) => "variable",

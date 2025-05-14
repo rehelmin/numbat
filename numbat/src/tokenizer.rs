@@ -79,6 +79,7 @@ pub enum TokenKind {
     LogicalAnd,
     LogicalOr,
     BitwiseOr,
+    BitwiseAnd,
     Period,
     QuestionMark,
 
@@ -557,6 +558,7 @@ impl Tokenizer {
             '|' if self.match_char(input, '>') => TokenKind::PostfixApply,
             '*' if self.match_char(input, '*') => TokenKind::Power,
             '|' => TokenKind::BitwiseOr,
+            '&' => TokenKind::BitwiseAnd,
             '+' => TokenKind::Plus,
             '*' | '·' | '⋅' | '×' => TokenKind::Multiply,
             '/' => TokenKind::Divide,

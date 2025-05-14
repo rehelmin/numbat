@@ -35,6 +35,7 @@ pub enum BinaryOperator {
     LogicalAnd,
     LogicalOr,
     BitwiseOr,
+    BitwiseAnd,
 }
 
 impl PrettyPrint for BinaryOperator {
@@ -57,6 +58,7 @@ impl PrettyPrint for BinaryOperator {
             LogicalAnd => "&&",
             LogicalOr => "||",
             BitwiseOr => "|",
+            BitwiseAnd => "&",
         });
 
         match self {

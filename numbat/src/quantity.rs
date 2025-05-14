@@ -314,6 +314,14 @@ impl std::ops::BitOr for Quantity {
     }
 }
 
+impl std::ops::BitAnd for Quantity {
+    type Output = Quantity;
+
+    fn bitand(self, rhs: Self) -> Self::Output {
+        Quantity::new(self.value & rhs.value, self.unit.clone())
+    }
+}
+
 impl std::ops::Div for Quantity {
     type Output = Quantity;
 

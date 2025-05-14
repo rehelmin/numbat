@@ -1157,6 +1157,15 @@ impl<'a> Parser<'a> {
             tokens,
             &[TokenKind::LogicalAnd],
             |_| BinaryOperator::LogicalAnd,
+            |parser| parser.bitwise_and(tokens),
+        )
+    }
+
+    fn bitwise_and(&mut self, tokens: &[Token<'a>]) -> Result<Expression<'a>> {
+        self.parse_binop(
+            tokens,
+            &[TokenKind::BitwiseAnd],
+            |_| BinaryOperator::BitwiseAnd,
             |parser| parser.logical_neg(tokens),
         )
     }

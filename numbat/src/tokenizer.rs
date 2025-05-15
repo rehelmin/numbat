@@ -80,6 +80,7 @@ pub enum TokenKind {
     LogicalOr,
     BitwiseOr,
     BitwiseAnd,
+    BitShiftLeft,
     Period,
     QuestionMark,
 
@@ -465,6 +466,7 @@ impl Tokenizer {
             '}' if !self.interpolation_state.is_inside() => TokenKind::RightCurly,
             '≤' => TokenKind::LessOrEqual,
             '<' if self.match_char(input, '=') => TokenKind::LessOrEqual,
+            '<' if self.match_char(input, '<') => TokenKind::BitShiftLeft,
             '<' => TokenKind::LessThan,
             '≥' => TokenKind::GreaterOrEqual,
             '>' if self.match_char(input, '=') => TokenKind::GreaterOrEqual,

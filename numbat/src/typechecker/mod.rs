@@ -525,6 +525,7 @@ impl TypeChecker {
                                         typed_ast::BinaryOperator::LogicalOr => "or".into(),
                                         typed_ast::BinaryOperator::BitwiseOr => "bitwise or".into(),
                                         typed_ast::BinaryOperator::BitwiseAnd => "bitwise and".into(),
+                                        typed_ast::BinaryOperator::BitShiftLeft => "bit shift left".into(),
                                     },
                                     span_expected: lhs.full_span(),
                                     expected_name: " left hand side",
@@ -554,6 +555,7 @@ impl TypeChecker {
                         typed_ast::BinaryOperator::Sub => get_type_and_assert_equal_dtypes()?,
                         typed_ast::BinaryOperator::BitwiseOr => get_type_and_assert_equal_dtypes()?,
                         typed_ast::BinaryOperator::BitwiseAnd => get_type_and_assert_equal_dtypes()?,
+                        typed_ast::BinaryOperator::BitShiftLeft => get_type_and_assert_equal_dtypes()?,
                         typed_ast::BinaryOperator::Mul | typed_ast::BinaryOperator::Div => {
                             let type_lhs = lhs_checked.get_type();
                             let type_rhs = rhs_checked.get_type();

@@ -152,6 +152,14 @@ impl std::ops::BitAnd for Number {
     }
 }
 
+impl std::ops::Shl for Number {
+    type Output = Number;
+
+    fn shl(self, rhs: Self) -> Self::Output {
+        Number(((self.0 as u64) << rhs.0 as u64) as f64)
+    }
+}
+
 impl std::ops::Div for Number {
     type Output = Number;
 

@@ -1166,6 +1166,15 @@ impl<'a> Parser<'a> {
             tokens,
             &[TokenKind::BitwiseAnd],
             |_| BinaryOperator::BitwiseAnd,
+            |parser| parser.bitshift_left(tokens),
+        )
+    }
+
+    fn bitshift_left(&mut self, tokens: &[Token<'a>]) -> Result<Expression<'a>> {
+        self.parse_binop(
+            tokens,
+            &[TokenKind::BitShiftLeft],
+            |_| BinaryOperator::BitShiftLeft,
             |parser| parser.logical_neg(tokens),
         )
     }

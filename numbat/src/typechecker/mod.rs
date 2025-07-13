@@ -368,6 +368,17 @@ impl TypeChecker {
                             )));
                         }
                     }
+                    ast::UnaryOperator::BitwiseNot => {
+                        if self
+                            .add_equal_constraint(&type_, &Type::scalar())
+                            .is_trivially_violated()
+                        {
+                            return Err(Box::new(TypeCheckError::NonScalarBitwiseNotArgument(
+                                expr.full_span(),
+                                type_,
+                            )));
+                        }
+                    }
                     ast::UnaryOperator::Negate => {
                         self.enforce_dtype(&type_, expr.full_span())?;
                     }

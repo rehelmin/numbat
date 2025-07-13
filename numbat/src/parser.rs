@@ -1284,6 +1284,15 @@ impl<'a> Parser<'a> {
                 expr: Box::new(rhs),
                 span_op: span,
             })
+        } else if self.match_exact(tokens, TokenKind::BitwiseNot).is_some() {
+            let span = self.last(tokens).unwrap().span;
+            let rhs = self.unary(tokens)?;
+
+            Ok(Expression::UnaryOperator {
+                op: UnaryOperator::BitwiseNot,
+                expr: Box::new(rhs),
+                span_op: span,
+            })
         } else if self.match_exact(tokens, TokenKind::Plus).is_some() {
             // A unary `+` is equivalent to nothing. We can get rid of the
             // symbol without inserting any nodes in the AST.

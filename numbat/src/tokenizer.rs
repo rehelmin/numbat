@@ -89,6 +89,7 @@ pub enum TokenKind {
     LogicalOr,
     BitwiseOr,
     BitwiseAnd,
+    BitwiseNot,
     BitwiseXor,
     BitShiftLeft,
     BitShiftRight,
@@ -582,6 +583,7 @@ impl Tokenizer {
             '|' => TokenKind::BitwiseOr,
             '&' => TokenKind::BitwiseAnd,
             '⨁' => TokenKind::BitwiseXor,
+            '~' => TokenKind::BitwiseNot,
             '+' => TokenKind::Plus,
             '*' | '·' | '⋅' | '×' => TokenKind::Multiply,
             '/' => TokenKind::Divide,
@@ -910,9 +912,31 @@ fn test_tokenize_basic() {
         [("...", Ellipsis, ByteIndex(0)), ("", Eof, ByteIndex(3))]
     );
 
-    insta::assert_snapshot!(
-        tokenize_reduced_pretty("~").unwrap_err(),
-    @"Error at index 0: `Unexpected character: '~'`");
+    assert_eq!(
+        tokenize_reduced("1<<2\n42").unwrap(),
+        [
+            ("1", Number, ByteIndex(0)),
+            ("<<", BitShiftLeft, ByteIndex(1)),
+            ("2", Number, ByteIndex(3)),
+            ("\n", Newline, ByteIndex(4)),
+            ("42", Number, ByteIndex(5)),
+            ("", Eof, ByteIndex(7))
+        ]
+    );
+
+    assert_eq!(
+        tokenize_reduced("1|2&42").unwrap(),
+        [
+            ("1", Number, ByteIndex(0)),
+            ("|", BitwiseOr, ByteIndex(1)),
+            ("2", Number, ByteIndex(2)),
+            ("&", BitwiseAnd, ByteIndex(3)),
+            ("42", Number, ByteIndex(4)),
+            ("", Eof, ByteIndex(6))
+        ]
+    );
+
+
 }
 
 #[test]

@@ -16,6 +16,7 @@ pub enum UnaryOperator {
     Factorial(NonZeroUsize),
     Negate,
     LogicalNeg,
+    BitwiseNot,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

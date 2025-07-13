@@ -80,6 +80,7 @@ pub enum Op {
     BitwiseOr,
     BitwiseAnd,
     BitwiseXor,
+    BitwiseNot,
     BitShiftLeft,
     BitShiftRight,
     LogicalNeg,
@@ -143,6 +144,7 @@ impl Op {
             | Op::AccessStructField
             | Op::BuildList => 1,
             Op::Negate
+            | Op::BitwiseNot
             | Op::Factorial
             | Op::Add
             | Op::AddToDateTime
@@ -200,6 +202,7 @@ impl Op {
             Op::LogicalAnd => "LogicalAnd",
             Op::LogicalOr => "LogicalOr",
             Op::BitwiseOr => "BitwiseOr",
+            Op::BitwiseNot => "BitwiseNot",
             Op::BitwiseAnd => "BitwiseAnd",
             Op::BitwiseXor => "BitwiseXor",
             Op::BitShiftLeft => "BitShiftLeft",
@@ -857,6 +860,20 @@ impl Vm {
                 Op::LogicalNeg => {
                     let rhs = self.pop_bool();
                     self.push_bool(!rhs);
+                }
+                Op::BitwiseNot => {
+                    let rhs = self.pop_quantity();
+
+                    let check_rhs = rhs
+                                    .as_scalar()
+                                    .expect("Expected bitwise not operand to be scalar")
+                                    .to_f64();
+
+
+                    if check_rhs.fract() != 0. {
+                        return Err(Box::new(RuntimeError::BitwiseNotOfNonInteger));
+                    }
+                    self.push_quantity(!rhs);
                 }
                 Op::Negate => {
                     let rhs = self.pop_quantity();

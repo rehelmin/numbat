@@ -22,3 +22,9 @@ assert_eq(0xFF << 0, 0xFF)
 
 # bitshift right checks
 assert_eq(0xC7A5 >> 8, 0xC7)
+
+# bit flipping operation
+assert_eq(0xC700 ⨁ (0xC0 << 8), 0x700)
+
+# bit clearing operation
+assert_eq(0xC700 & ~(1 << 15), 0x4700)

@@ -354,6 +354,14 @@ impl std::ops::Div for Quantity {
     }
 }
 
+impl std::ops::Not for Quantity {
+    type Output = Quantity;
+
+    fn not(self) -> Self::Output {
+        Quantity::new(!self.value, self.unit)
+    }
+}
+
 impl std::ops::Neg for Quantity {
     type Output = Quantity;
 

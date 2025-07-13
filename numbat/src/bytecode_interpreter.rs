@@ -130,6 +130,7 @@ impl BytecodeInterpreter {
                     BinaryOperator::LogicalOr => Op::LogicalOr,
                     BinaryOperator::BitwiseOr => Op::BitwiseOr,
                     BinaryOperator::BitwiseAnd => Op::BitwiseAnd,
+                    BinaryOperator::BitwiseXor => Op::BitwiseXor,
                     BinaryOperator::BitShiftLeft => Op::BitShiftLeft,
                     BinaryOperator::BitShiftRight => Op::BitShiftRight,
                 };

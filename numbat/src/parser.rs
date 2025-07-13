@@ -1166,6 +1166,15 @@ impl<'a> Parser<'a> {
             tokens,
             &[TokenKind::BitwiseAnd],
             |_| BinaryOperator::BitwiseAnd,
+            |parser| parser.bitwise_xor(tokens),
+        )
+    }
+
+    fn bitwise_xor(&mut self, tokens: &[Token<'a>]) -> Result<Expression<'a>> {
+        self.parse_binop(
+            tokens,
+            &[TokenKind::BitwiseXor],
+            |_| BinaryOperator::BitwiseXor,
             |parser| parser.bitshift_left(tokens),
         )
     }

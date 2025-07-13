@@ -322,6 +322,14 @@ impl std::ops::BitAnd for Quantity {
     }
 }
 
+impl std::ops::BitXor for Quantity {
+    type Output = Quantity;
+
+    fn bitxor(self, rhs: Self) -> Self::Output {
+        Quantity::new(self.value ^ rhs.value, self.unit.clone())
+    }
+}
+
 impl std::ops::Shl for Quantity {
     type Output = Quantity;
 

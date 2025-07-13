@@ -95,6 +95,12 @@ pub fn evaluate_const_expr(expr: &typed_ast::Expression) -> Result<Exponent> {
                         "bitwise",
                     )))
                 }
+                typed_ast::BinaryOperator::BitwiseXor => {
+                    Err(Box::new(TypeCheckError::UnsupportedConstEvalExpression(
+                        e.full_span(),
+                        "bitwise",
+                    )))
+                }
                 typed_ast::BinaryOperator::BitShiftLeft
                 | typed_ast::BinaryOperator::BitShiftRight => {
                     Err(Box::new(TypeCheckError::UnsupportedConstEvalExpression(

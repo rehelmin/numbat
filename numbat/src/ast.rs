@@ -36,6 +36,7 @@ pub enum BinaryOperator {
     LogicalOr,
     BitwiseOr,
     BitwiseAnd,
+    BitwiseXor,
     BitShiftLeft,
     BitShiftRight,
 }
@@ -61,6 +62,7 @@ impl PrettyPrint for BinaryOperator {
             LogicalOr => "||",
             BitwiseOr => "|",
             BitwiseAnd => "&",
+            BitwiseXor => "^",
             BitShiftLeft => "<<",
             BitShiftRight => ">>",
         });

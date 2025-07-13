@@ -79,6 +79,7 @@ pub enum Op {
     LogicalOr,
     BitwiseOr,
     BitwiseAnd,
+    BitwiseXor,
     BitShiftLeft,
     BitShiftRight,
     LogicalNeg,
@@ -162,6 +163,7 @@ impl Op {
             | Op::LogicalOr
             | Op::BitwiseOr
             | Op::BitwiseAnd
+            | Op::BitwiseXor
             | Op::BitShiftRight
             | Op::BitShiftLeft
             | Op::LogicalNeg
@@ -199,6 +201,7 @@ impl Op {
             Op::LogicalOr => "LogicalOr",
             Op::BitwiseOr => "BitwiseOr",
             Op::BitwiseAnd => "BitwiseAnd",
+            Op::BitwiseXor => "BitwiseXor",
             Op::BitShiftLeft => "BitShiftLeft",
             Op::BitShiftRight => "BitShiftRight",
             Op::LogicalNeg => "LogicalNeg",
@@ -829,6 +832,14 @@ impl Vm {
                     let lhs = self.pop_quantity();
 
                     let result = Ok(lhs & rhs);
+
+                    self.push_quantity(result.map_err(RuntimeError::QuantityError)?);
+                }
+                Op::BitwiseXor => {
+                    let rhs = self.pop_quantity();
+                    let lhs = self.pop_quantity();
+
+                    let result = Ok(lhs ^ rhs);
 
                     self.push_quantity(result.map_err(RuntimeError::QuantityError)?);
                 }

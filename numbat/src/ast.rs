@@ -62,7 +62,7 @@ impl PrettyPrint for BinaryOperator {
             LogicalOr => "||",
             BitwiseOr => "|",
             BitwiseAnd => "&",
-            BitwiseXor => "^",
+            BitwiseXor => "⨁",
             BitShiftLeft => "<<",
             BitShiftRight => ">>",
         });

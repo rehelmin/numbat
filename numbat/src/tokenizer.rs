@@ -1187,16 +1187,6 @@ fn test_logical_operators() {
     "", Eof, 13
     "###
     );
-
-    insta::assert_snapshot!(
-        tokenize_reduced_pretty("true | false").unwrap_err(),
-        @"Error at index 5: `Unexpected character: '|'`"
-    );
-
-    insta::assert_snapshot!(
-        tokenize_reduced_pretty("true & false").unwrap_err(),
-        @"Error at index 5: `Unexpected character: '&'`"
-    );
 }
 
 #[test]

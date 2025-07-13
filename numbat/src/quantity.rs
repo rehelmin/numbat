@@ -330,6 +330,14 @@ impl std::ops::Shl for Quantity {
     }
 }
 
+impl std::ops::Shr for Quantity {
+    type Output = Quantity;
+
+    fn shr(self, rhs: Self) -> Self::Output {
+        Quantity::new(self.value >> rhs.value, self.unit.clone())
+    }
+}
+
 impl std::ops::Div for Quantity {
     type Output = Quantity;
 

@@ -131,6 +131,7 @@ impl BytecodeInterpreter {
                     BinaryOperator::BitwiseOr => Op::BitwiseOr,
                     BinaryOperator::BitwiseAnd => Op::BitwiseAnd,
                     BinaryOperator::BitShiftLeft => Op::BitShiftLeft,
+                    BinaryOperator::BitShiftRight => Op::BitShiftRight,
                 };
                 self.vm.add_op(op);
             }

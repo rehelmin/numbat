@@ -81,6 +81,7 @@ pub enum TokenKind {
     BitwiseOr,
     BitwiseAnd,
     BitShiftLeft,
+    BitShiftRight,
     Period,
     QuestionMark,
 
@@ -470,6 +471,7 @@ impl Tokenizer {
             '<' => TokenKind::LessThan,
             '≥' => TokenKind::GreaterOrEqual,
             '>' if self.match_char(input, '=') => TokenKind::GreaterOrEqual,
+            '>' if self.match_char(input, '>') => TokenKind::BitShiftRight,
             '>' => TokenKind::GreaterThan,
             '?' => TokenKind::QuestionMark,
             '0' if self
